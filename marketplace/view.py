@@ -115,3 +115,55 @@ def all_items(request):
 def item_detail(request, pk):
     """Details page for each item"""
     item = get_object_or_404(Item, pk=pk)
+
+    # Increment view count
+    item.increment_views()
+    
+    # Handle mark as sold (simple version)
+    if request.method == 'POST' and 'mark_sold' in request.POST:
+        item.is_sold = True
+        item.save()
+        messages.success(request, f'"{item.item_name}" has been marked as sold!')
+        return redirect('home')
+    
+    # Get related items (same course or type, excluding current item)
+    related_items = Item.objects.filter(
+        Q(course=item.course, course__isnull=False) | Q(item_type=item.item_type)
+    ).exclude(pk=item.pk).filter(is_sold=False)[:3]
+    
+    # Get seller's other items
+    other_items = Item.objects.filter(
+        seller_name=item.seller_name,
+        is_sold=False
+    ).exclude(pk=item.pk)[:3]
+    
+    context = {
+        'item': item,
+        'related_items': related_items,
+        'other_items': other_items,
+    }
+    return render(request, 'item_detail.html', context)
+
+def search_ajax(request):
+    """AJAX search for autocomplete"""
+    query = request.GET.get('q', '').strip()
+    if len(query) >= 2:
+        items = Item.objects.filter(
+            Q(item_name__icontains=query) |
+            Q(course__icontains=query) |
+            Q(author__icontains=query),
+            is_sold=False
+        )[:10]
+        
+        results = []
+        for item in items:
+            results.append({
+                'id': item.pk,
+                'name': item.item_name,
+                'course': item.course or '',
+                'price': str(item.price),
+                'url': item.get_absolute_url()
+            })
+        return JsonResponse({'results': results})
+    
+    return JsonResponse({'results': []})

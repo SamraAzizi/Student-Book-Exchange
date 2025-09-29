@@ -55,3 +55,17 @@ class SearchForm(forms.Form):
             'class': 'form-control',
             'placeholder': 'Search by title, author, course...'
         })
+        )
+    item_type = forms.ChoiceField(
+        choices=[('', 'All Types')] + Item.ITEM_TYPES,
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    course = forms.CharField(
+        max_length=50,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Filter by course...'
+        })
+    )

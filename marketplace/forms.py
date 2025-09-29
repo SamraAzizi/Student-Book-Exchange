@@ -31,3 +31,27 @@ class ItemForm(forms.ModelForm):
                 'placeholder': '0.00',
                 'required': True
             }),
+            }
+    
+    def clean_price(self):
+        price = self.cleaned_data.get('price')
+        if price is not None and price <= 0:
+            raise forms.ValidationError("Price must be greater than zero.")
+        return price
+    
+    def clean_contact_info(self):
+        contact = self.cleaned_data.get('contact_info')
+        if contact:
+            # Basic validation for email or phone
+            if '@' not in contact and not any(char.isdigit() for char in contact):
+                raise forms.ValidationError("Please enter a valid email address or phone number.")
+        return contact
+
+class SearchForm(forms.Form):
+    search = forms.CharField(
+        max_length=100, 
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Search by title, author, course...'
+        })

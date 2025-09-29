@@ -43,3 +43,36 @@ def post_item(request):
                 f'🎉 Your "{item.item_name}" has been posted successfully! '
                 f'Students can now contact you at {item.contact_info}'
             )
+
+            return redirect('item_detail', pk=item.pk)
+        else:
+            messages.error(request, 'Please fix the errors below.')
+    else:
+        form = ItemForm()
+    
+    return render(request, 'post_item.html', {'form': form})
+
+def all_items(request):
+    """GET and view all items with filtering and search"""
+    items = Item.objects.filter(is_sold=False)
+    
+    # Search functionality
+    search_query = request.GET.get('search', '').strip()
+    if search_query:
+        items = items.filter(
+            Q(item_name__icontains=search_query) |
+            Q(author__icontains=search_query) |
+            Q(course__icontains=search_query) |
+            Q(description__icontains=search_query) |
+            Q(seller_name__icontains=search_query)
+        )
+    
+    # Filter by type
+    item_type = request.GET.get('type', '').strip()
+    if item_type in ['book', 'notes']:
+        items = items.filter(item_type=item_type)
+    
+    # Filter by course
+    course_filter = request.GET.get('course', '').strip()
+    if course_filter:
+        items = items.filter(course__icontains=course_filter)

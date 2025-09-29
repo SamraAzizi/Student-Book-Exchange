@@ -76,3 +76,42 @@ def all_items(request):
     course_filter = request.GET.get('course', '').strip()
     if course_filter:
         items = items.filter(course__icontains=course_filter)
+
+        # Filter by condition
+    condition_filter = request.GET.get('condition', '').strip()
+    if condition_filter:
+        items = items.filter(condition=condition_filter)
+    
+    # Sort options
+    sort_by = request.GET.get('sort', '-date_posted')
+    valid_sorts = ['-date_posted', 'price', '-price', 'item_name', '-view_count']
+    if sort_by in valid_sorts:
+        items = items.order_by(sort_by)
+    
+    # Pagination
+    paginator = Paginator(items, 12)  # Show 12 items per page
+    page_number = request.GET.get('page')
+    items_page = paginator.get_page(page_number)
+    
+    # Get filter options
+    all_courses = Item.objects.filter(
+        is_sold=False, 
+        course__isnull=False
+    ).exclude(course='').values_list('course', flat=True).distinct().order_by('course')
+    
+    context = {
+        'items': items_page,
+        'total_results': items.count(),
+        'search_query': search_query,
+        'current_type': item_type,
+        'current_course': course_filter,
+        'current_condition': condition_filter,
+        'current_sort': sort_by,
+        'all_courses': all_courses,
+        'conditions': Item.CONDITIONS,
+    }
+    return render(request, 'all_items.html', context)
+
+def item_detail(request, pk):
+    """Details page for each item"""
+    item = get_object_or_404(Item, pk=pk)

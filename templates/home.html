@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section text-center py-5 mb-5">
+    <h1 class="display-4">🎓 Student Book & Notes Exchange</h1>
+    <p class="lead">Save money on textbooks and find quality study notes from fellow students</p>
+    <div class="mt-4">
+        <a href="{% url 'all_items' %}" class="btn btn-primary btn-lg me-3">Browse Items</a>
+        <a href="{% url 'post_item' %}" class="btn btn-outline-light btn-lg">Sell Your Items</a>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-5">
+    <div class="col-md-4 mb-3">
+        <div class="stat-card text-center p-4">
+            <h3 class="stat-number">{{ stats.total_items }}</h3>
+            <p class="stat-label mb-0">Total Items Available</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="stat-card text-center p-4">
+            <h3 class="stat-number">{{ stats.total_books }}</h3>
+            <p class="stat-label mb-0">Books Available</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="stat-card text-center p-4">
+            <h3 class="stat-number">{{ stats.total_notes }}</h3>
+            <p class="stat-label mb-0">Notes Available</p>
+        </div>
+    </div>
+</div>

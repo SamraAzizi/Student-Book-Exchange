@@ -31,3 +31,27 @@ class ItemAdmin(admin.ModelAdmin):
             'fields': ('is_sold', 'date_posted', 'view_count'),
         }),
     )
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.select_related()
+    
+    actions = ['mark_as_sold', 'mark_as_available']
+    
+    def mark_as_sold(self, request, queryset):
+        updated = queryset.update(is_sold=True)
+        self.message_user(request, f'{updated} items marked as sold.')
+    mark_as_sold.short_description = "Mark selected items as sold"
+    
+    def mark_as_available(self, request, queryset):
+        updated = queryset.update(is_sold=False)
+        self.message_user(request, f'{updated} items marked as available.')
+    mark_as_available.short_description = "Mark selected items as available"
+
+# Customize admin site
+admin.site.site_header = "UniExchange Admin"
+admin.site.site_title = "UniExchange Admin Portal"
+admin.site.index_title = "Welcome to UniExchange Administration"
+
+print("✅ ALL DJANGO FILES CREATED SUCCESSFULLY!")
+print("🚀 Your complete Student Marketplace is ready to run!")

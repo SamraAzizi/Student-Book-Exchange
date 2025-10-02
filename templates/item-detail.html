@@ -53,3 +53,36 @@
                 <p class="text-muted">{{ item.description|linebreaks }}</p>
             </div>
             {% endif %}
+
+            <!-- Contact Section -->
+            <div class="contact-section p-4 bg-light rounded">
+                <h5>📞 Contact Seller</h5>
+                <p class="mb-2"><strong>Seller:</strong> {{ item.seller_name }}</p>
+                <p class="contact-info mb-3">{{ item.contact_info }}</p>
+                
+                {% if '@' in item.contact_info %}
+                    <a href="mailto:{{ item.contact_info }}?subject=Interested in {{ item.item_name }}&body=Hi {{ item.seller_name }}, I'm interested in your {{ item.item_name }}. Is it still available?" 
+                       class="btn btn-success btn-lg w-100 mb-2">
+                        📧 Send Email
+                    </a>
+                {% else %}
+                    <a href="https://wa.me/{{ item.contact_info|slice:'1:' }}?text=Hi {{ item.seller_name }}, I'm interested in your {{ item.item_name }}. Is it still available?" 
+                       class="btn btn-success btn-lg w-100 mb-2" target="_blank">
+                        💬 WhatsApp Seller
+                    </a>
+                {% endif %}
+                
+                <small class="d-block text-muted text-center mt-2">
+                    ⚠️ Meet on campus for safe exchange. Inspect item before payment.
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Related Items -->
+{% if related_items %}
+<div class="mt-5">
+    <h3 class="mb-4">Similar Items</h3>
+    <div class="row">
+        {% for related_item in related_items %}

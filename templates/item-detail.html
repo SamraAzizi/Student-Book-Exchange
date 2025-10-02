@@ -86,3 +86,38 @@
     <h3 class="mb-4">Similar Items</h3>
     <div class="row">
         {% for related_item in related_items %}
+
+        <div class="col-md-4 mb-4">
+                <div class="card item-card h-100">
+                    {% if related_item.image %}
+                        <img src="{{ related_item.image.url }}" class="card-img-top item-image" alt="{{ related_item.item_name }}">
+                    {% else %}
+                        <div class="card-img-top placeholder-image d-flex align-items-center justify-content-center">
+                            {% if related_item.item_type == 'book' %}📚{% else %}📝{% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ related_item.item_name }}</h5>
+                        <p class="card-text text-muted small">
+                            {% if related_item.author %}by {{ related_item.author }}{% endif %}
+                            {% if related_item.course %} • {{ related_item.course }}{% endif %}
+                        </p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="price">${{ related_item.price }}</span>
+                                <span class="badge bg-secondary">{{ related_item.get_condition_display }}</span>
+                            </div>
+                            <a href="{% url 'item_detail' related_item.pk %}" class="btn btn-primary btn-sm w-100">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<div class="mt-4">
+    <a href="{% url 'all_items' %}" class="btn btn-outline-primary">← Back to All Items</a>
+</div>
+{% endblock %}

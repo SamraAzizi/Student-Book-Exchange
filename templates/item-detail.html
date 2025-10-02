@@ -22,3 +22,34 @@
                 </span>
             </div>
         {% endif %}
+
+        </div>
+    
+    <div class="col-md-6">
+        <div class="item-details">
+            <h1 class="mb-3">{{ item.item_name }}</h1>
+            
+            <div class="price-section mb-4">
+                <span class="price-large">${{ item.price }}</span>
+                <span class="badge bg-secondary ms-2 fs-6">{{ item.get_condition_display }}</span>
+            </div>
+
+            <div class="details-grid mb-4">
+                {% if item.author %}
+                <p><strong>📖 Author:</strong> {{ item.author }}</p>
+                {% endif %}
+                {% if item.course %}
+                <p><strong>📚 Course:</strong> {{ item.course }}</p>
+                {% endif %}
+                <p><strong>🏷️ Type:</strong> {{ item.get_item_type_display }}</p>
+                <p><strong>⭐ Condition:</strong> {{ item.get_condition_display }}</p>
+                <p><strong>📅 Posted:</strong> {{ item.date_posted|date:"F d, Y" }}</p>
+                <p><strong>👁️ Views:</strong> {{ item.view_count }}</p>
+            </div>
+
+            {% if item.description %}
+            <div class="description-section mb-4">
+                <h5>📝 Description</h5>
+                <p class="text-muted">{{ item.description|linebreaks }}</p>
+            </div>
+            {% endif %}

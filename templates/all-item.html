@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}All Items - UniExchange{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📋 All Items ({{ total_results }})</h2>
+    <a href="{% url 'post_item' %}" class="btn btn-primary">+ Add Item</a>
+</div>
+
+<!-- Filters -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-3">
+                <label for="type" class="form-label">Type</label>
+                <select name="type" id="type" class="form-select">
+                    <option value="">All Types</option>
+                    <option value="book" {% if current_type == 'book' %}selected{% endif %}>Books</option>
+                    <option value="notes" {% if current_type == 'notes' %}selected{% endif %}>Notes</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="course" class="form-label">Course</label>
+                <select name="course" id="course" class="form-select">
+                    <option value="">All Courses</option>
+                    {% for course in all_courses %}
+                        <option value="{{ course }}" {% if current_course == course %}selected{% endif %}>{{ course }}</option>
+                    {% endfor %}

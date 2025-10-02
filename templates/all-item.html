@@ -27,3 +27,31 @@
                     {% for course in all_courses %}
                         <option value="{{ course }}" {% if current_course == course %}selected{% endif %}>{{ course }}</option>
                     {% endfor %}
+                    </select>
+            </div>
+            <div class="col-md-3">
+                <label for="search" class="form-label">Search</label>
+                <input type="text" name="search" id="search" class="form-control" 
+                       placeholder="Search..." value="{{ search_query }}">
+            </div>
+            <div class="col-md-3 d-flex align-items-end gap-2">
+                <button type="submit" class="btn btn-outline-primary flex-grow-1">Filter</button>
+                <a href="{% url 'all_items' %}" class="btn btn-outline-secondary">Clear</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Items Grid -->
+{% if items %}
+    <div class="row">
+        {% for item in items %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card item-card h-100">
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" class="card-img-top item-image" alt="{{ item.item_name }}">
+                    {% else %}
+                        <div class="card-img-top placeholder-image d-flex align-items-center justify-content-center">
+                            {% if item.item_type == 'book' %}📚{% else %}📝{% endif %}
+                        </div>
+                    {% endif %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ item.item_name }} - UniExchange{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'all_items' %}">All Items</a></li>
+        <li class="breadcrumb-item active">{{ item.item_name }}</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        {% if item.image %}
+            <img src="{{ item.image.url }}" class="img-fluid rounded shadow" alt="{{ item.item_name }}">
+        {% else %}
+            <div class="placeholder-image-large d-flex align-items-center justify-content-center rounded shadow">
+                <span style="font-size: 4rem;">
+                    {% if item.item_type == 'book' %}📚{% else %}📝{% endif %}
+                </span>
+            </div>
+        {% endif %}

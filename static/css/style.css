@@ -151,3 +151,40 @@ main {
     font-weight: 600;
     word-break: break-all;
 }
+
+/* Details Grid */
+.details-grid p {
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.details-grid p:last-child {
+    border-bottom: none;
+}
+
+.details-grid strong {
+    color: var(--dark-gray);
+}
+
+/* Description Section */
+.description-section {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.description-section h5 {
+    color: var(--dark-gray);
+    margin-bottom: 1rem;
+}
+
+/* Form Styling */
+.form-control, .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}

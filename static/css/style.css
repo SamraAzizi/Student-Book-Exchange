@@ -100,3 +100,54 @@ main {
     object-fit: cover;
     width: 100%;
 }
+
+.placeholder-image {
+    height: 250px;
+    background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+    font-size: 4rem;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-image-large {
+    height: 400px;
+    background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Price Styling */
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--success-color);
+}
+
+.price-large {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--success-color);
+}
+
+.price-section {
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+/* Contact Section */
+.contact-section {
+    border: 2px solid #e9ecef;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    word-break: break-all;
+}

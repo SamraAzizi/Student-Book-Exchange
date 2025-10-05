@@ -180,62 +180,7 @@ UniExchange/
 | is_sold | BooleanField | Sold status |
 | view_count | IntegerField | Number of views |
 
-## 🌐 Deployment Options
 
-### Option 1: PythonAnywhere (Free)
-1. Sign up at [pythonanywhere.com](https://www.pythonanywhere.com)
-2. Upload project files
-3. Install dependencies: `pip3.10 install --user django pillow`
-4. Run migrations
-5. Configure web app
-6. Site URL: `username.pythonanywhere.com`
-
-### Option 2: Heroku
-1. Install Heroku CLI
-2. Create `Procfile`: `web: gunicorn book_exchange.wsgi`
-3. Add `gunicorn` to requirements.txt
-4. Deploy: `git push heroku main`
-
-### Option 3: Railway/Render
-1. Connect GitHub repository
-2. Auto-deploy on push
-3. Configure environment variables
-
-### Option 4: University Server
-1. Install Python on university computer
-2. Run: `python manage.py runserver 0.0.0.0:8000`
-3. Access via university network IP
-
-## 🔒 Security Considerations
-
-### For Production:
-- Change `SECRET_KEY` in settings.py
-- Set `DEBUG = False`
-- Add proper `ALLOWED_HOSTS`
-- Use environment variables for sensitive data
-- Enable HTTPS
-- Use PostgreSQL instead of SQLite for better performance
-
-## 🎨 Customization
-
-### Change University Branding
-Edit `static/css/style.css`:
-```css
-:root {
-    --primary-color: #your-color;
-    --secondary-color: #your-color;
-}
-```
-
-### Add More Fields
-Edit `marketplace/models.py` and add fields to Item model:
-```python
-isbn = models.CharField(max_length=20, blank=True)
-edition = models.CharField(max_length=50, blank=True)
-```
-
-### Modify Email Templates
-Edit contact section in `templates/item_detail.html`
 
 ## 🧪 Testing
 

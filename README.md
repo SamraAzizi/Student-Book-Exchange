@@ -94,3 +94,72 @@ python manage.py runserver
 
 Visit: **http://127.0.0.1:8000**
 
+## 🚀 Usage
+
+### For Students Selling Items
+
+1. Click **"Sell Item"** in navigation
+2. Fill out the form:
+   - Item name and type (book/notes)
+   - Author and course code
+   - Price and condition
+   - Description
+   - Your contact info (email or WhatsApp)
+   - Upload a photo (optional)
+3. Submit and share your listing!
+
+### For Students Buying Items
+
+1. Browse the homepage or click **"Browse All"**
+2. Use filters to find:
+   - Specific courses
+   - Books or notes
+   - Price range
+3. Click on items for full details
+4. Contact seller via email or WhatsApp
+5. Arrange campus meetup for exchange
+
+### Admin Access
+
+1. Go to: **http://127.0.0.1:8000/admin/**
+2. Login with superuser credentials
+3. Manage items, mark as sold, view statistics
+
+## 📁 Project Structure
+
+```
+UniExchange/
+├── manage.py                  # Django management script
+├── requirements.txt           # Python dependencies
+├── db.sqlite3                # SQLite database (after migration)
+│
+├── book_exchange/            # Main project folder
+│   ├── settings.py           # Django settings
+│   ├── urls.py               # Main URL configuration
+│   └── wsgi.py               # WSGI configuration
+│
+├── marketplace/              # Main app folder
+│   ├── models.py             # Database models (Item)
+│   ├── views.py              # View functions
+│   ├── urls.py               # App URL patterns
+│   ├── forms.py              # Form definitions
+│   ├── admin.py              # Admin panel configuration
+│   └── migrations/           # Database migrations
+│
+├── templates/                # HTML templates
+│   ├── base.html             # Base template
+│   ├── home.html             # Homepage
+│   ├── post_item.html        # Post new item form
+│   ├── all_items.html        # Browse all items
+│   └── item_detail.html      # Item detail page
+│
+├── static/                   # Static files
+│   └── css/
+│       └── style.css         # Custom CSS
+│
+└── media/                    # User uploaded files
+    └── item_images/          # Item photos
+```
+
+
+

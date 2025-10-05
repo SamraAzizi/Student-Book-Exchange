@@ -52,5 +52,45 @@ A web-based marketplace platform designed specifically for university students t
 - pip (Python package manager)
 - Virtual environment (recommended)
 
+### Step 1: Clone or Download Project
+```bash
+# Clone repository (if using Git)
+git clone <repository-url>
+cd UniExchange
 
+# Or download and extract ZIP file
+```
+
+### Step 2: Create Virtual Environment
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Mac/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### Step 3: Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4: Setup Database
+```bash
+# Create database tables
+python manage.py makemigrations marketplace
+python manage.py migrate
+
+# Create admin superuser (optional)
+python manage.py createsuperuser
+```
+
+### Step 5: Run Development Server
+```bash
+python manage.py runserver
+```
+
+Visit: **http://127.0.0.1:8000**
 

@@ -161,5 +161,118 @@ UniExchange/
     └── item_images/          # Item photos
 ```
 
+## 🗄️ Database Schema
 
+### Item Model
+| Field | Type | Description |
+|-------|------|-------------|
+| item_name | CharField | Title of book/notes |
+| description | TextField | Details and condition |
+| price | DecimalField | Price in dollars |
+| seller_name | CharField | Seller's name |
+| contact_info | CharField | Email or phone number |
+| image | ImageField | Photo of item (optional) |
+| item_type | CharField | Book or Notes |
+| author | CharField | Author/creator name |
+| course | CharField | Course code (e.g., CS 101) |
+| condition | CharField | Excellent/Good/Fair/Poor |
+| date_posted | DateTimeField | When item was listed |
+| is_sold | BooleanField | Sold status |
+| view_count | IntegerField | Number of views |
+
+## 🌐 Deployment Options
+
+### Option 1: PythonAnywhere (Free)
+1. Sign up at [pythonanywhere.com](https://www.pythonanywhere.com)
+2. Upload project files
+3. Install dependencies: `pip3.10 install --user django pillow`
+4. Run migrations
+5. Configure web app
+6. Site URL: `username.pythonanywhere.com`
+
+### Option 2: Heroku
+1. Install Heroku CLI
+2. Create `Procfile`: `web: gunicorn book_exchange.wsgi`
+3. Add `gunicorn` to requirements.txt
+4. Deploy: `git push heroku main`
+
+### Option 3: Railway/Render
+1. Connect GitHub repository
+2. Auto-deploy on push
+3. Configure environment variables
+
+### Option 4: University Server
+1. Install Python on university computer
+2. Run: `python manage.py runserver 0.0.0.0:8000`
+3. Access via university network IP
+
+## 🔒 Security Considerations
+
+### For Production:
+- Change `SECRET_KEY` in settings.py
+- Set `DEBUG = False`
+- Add proper `ALLOWED_HOSTS`
+- Use environment variables for sensitive data
+- Enable HTTPS
+- Use PostgreSQL instead of SQLite for better performance
+
+## 🎨 Customization
+
+### Change University Branding
+Edit `static/css/style.css`:
+```css
+:root {
+    --primary-color: #your-color;
+    --secondary-color: #your-color;
+}
+```
+
+### Add More Fields
+Edit `marketplace/models.py` and add fields to Item model:
+```python
+isbn = models.CharField(max_length=20, blank=True)
+edition = models.CharField(max_length=50, blank=True)
+```
+
+### Modify Email Templates
+Edit contact section in `templates/item_detail.html`
+
+## 🧪 Testing
+
+### Run Tests
+```bash
+python manage.py test marketplace
+```
+
+### Manual Testing Checklist
+- [ ] Homepage loads with statistics
+- [ ] Can post new items
+- [ ] Images upload successfully
+- [ ] Search and filters work
+- [ ] Contact buttons generate correct links
+- [ ] Admin panel accessible
+- [ ] Mobile responsive design works
+
+## 📊 Sample Data
+
+### Create Sample Items
+```bash
+python manage.py shell
+```
+
+```python
+from marketplace.models import Item
+
+Item.objects.create(
+    item_name="Introduction to Algorithms",
+    description="Great condition, minimal highlighting",
+    price=45.00,
+    seller_name="John Doe",
+    contact_info="john@university.edu",
+    item_type="book",
+    author="Thomas H. Cormen",
+    course="CS 201",
+    condition="good"
+)
+```
 
